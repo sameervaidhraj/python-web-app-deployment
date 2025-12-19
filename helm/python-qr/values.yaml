@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: vaidhraj0622/qr-flask-app
-  tag: latest
+  tag: "20368209406"
   pullPolicy: IfNotPresent
 
 service:
