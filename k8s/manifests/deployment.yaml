@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "python-qr.fullname" . }}
+  labels:
+    app: qr-flask-app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: qr-flask-app
+  template:
+    metadata:
+      labels:
+        app: qr-flask-app
+    spec:
+      containers:
+        - name: python-qr
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
