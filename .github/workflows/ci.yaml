@@ -77,23 +77,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
+      # ✅ AUTHENTICATE TO AWS (ROOT USER)
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          version: v1.27.0
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Set up Helm
-        uses: azure/setup-helm@v3
-        with:
-          version: v3.12.0
-
-      - name: Configure kubeconfig
+      # ✅ CREATE KUBECONFIG FOR EKS
+      - name: Update kubeconfig
         run: |
-          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > kubeconfig
-          export KUBECONFIG=$PWD/kubeconfig
+          aws eks update-kubeconfig \
+            --region ${{ secrets.AWS_REGION }} \
+            --name ${{ secrets.EKS_CLUSTER_NAME }}
 
+      # ✅ DEPLOY USING HELM
       - name: Deploy using Helm
         run: |
           helm upgrade --install python-qr helm/python-qr \
-            --set image.tag=${{ github.run_id }} \
-            --kubeconfig kubeconfig
+            --set image.tag=${{ github.run_id }}
