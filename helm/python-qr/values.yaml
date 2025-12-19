@@ -16,7 +16,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   hosts:
-    - host: qr-flask-app.local
+    - host: qr-flask-app.example.com
       paths:
         - path: /
           pathType: Prefix
