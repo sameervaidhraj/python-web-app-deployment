@@ -61,3 +61,5 @@ GitOps-driven continuous delivery
 The goal of this project is to provide a real-world DevOps implementation that reflects how applications are built, deployed, and managed in production environments.
 
 <img width="2880" height="1800" alt="Screenshot 2025-12-19 181609" src="https://github.com/user-attachments/assets/cadedba7-020a-4c13-b513-279c585164eb" />
+<img width="2880" height="1800" alt="Screenshot 2025-12-19 174023" src="https://github.com/user-attachments/assets/ab5c0d4a-363f-434c-b20c-7dc3a6d8a76a" />
+
